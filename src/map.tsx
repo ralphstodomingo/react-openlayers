@@ -38,11 +38,6 @@ export class Map extends React.Component<any, any> {
     loadTilesWhileInteractiong: undefined,
     logo: undefined,
     renderer: undefined,
-    //new options  for map component : setZoom, SetCenter, setResolution
-    /* Added by : Harinder Randhawa */
-    setCenter: undefined,
-    setZoom: undefined,
-    setResolution: undefined,
     view: new ol.View({center: [0, 0], zoom: 3}),
     controls: undefined,
     interactions: undefined,
@@ -100,17 +95,7 @@ export class Map extends React.Component<any, any> {
       this.map.on(eventName, olEvents[eventName]);
     }
   }
-  // update the view with new props
-  /* Modified by Harinder Randhawa */
-  componentWillReceiveProps(nextProps) {
-    let options = Util.getOptions(Object.assign(this.options, nextProps));
-    if(nextProps.setCenter !== this.props.view.center){
-      this.map.getView().setCenter(nextProps.setCenter);
-    }
-    if(nextProps.setZoom !== this.props.view.zoom){
-      this.map.getView().setZoom(nextProps.setZoom);
-    }
- }
+
   render() {
     return (
       <div>
@@ -140,9 +125,9 @@ export class Map extends React.Component<any, any> {
 
   // Ref. https://facebook.github.io/react/docs/context.html#how-to-use-context
   getChildContext(): any {
-    return {
+    return { 
       mapComp: this,
-      map: this.map
+      map: this.map 
     }
   }
 
